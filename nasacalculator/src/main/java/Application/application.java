@@ -1,6 +1,7 @@
 package Application;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
@@ -45,7 +46,12 @@ public class application {
                      int index=functionList.getSelectedIndex();  // pobiera miejsce gdzie jest funkcja
                      String function=listModel.getElementAt(index).getFunction(); // pobranie funkcji(np sin())
 
-                    formulaInput.setText(formulaInput.getText() + function);
+                   // formulaInput.setText(formulaInput.getText() + function);
+                    try {
+                        formulaInput.getDocument().insertString(formulaInput.getCaretPosition(), function,null);
+                    } catch (BadLocationException e1) {
+                        e1.printStackTrace();
+                    }
 
                     formulaInput.requestFocus(); //kursor
                     if(formulaInput.getText().contains("(")){ // jesli formula ma jakis nawias
@@ -76,7 +82,7 @@ public class application {
 
                         }
                         catch(Exception ex){
-                            JOptionPane.showMessageDialog(null, "Wrong data format"," Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, ex.getMessage()," Error", JOptionPane.ERROR_MESSAGE);
                         }
                         formulaInput.setText(""); // czyszczenie
 
@@ -100,7 +106,7 @@ public class application {
 
                 }
                 catch(Exception ex){
-                    JOptionPane.showMessageDialog(null, "Wrong data format"," Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage()," Error", JOptionPane.ERROR_MESSAGE);
                 }
                 formulaInput.setText("");
 
@@ -135,14 +141,15 @@ public class application {
 public void formula( String form) throws Exception{
 
         Expression expression=new Expression(form);
-    if (expression.checkSyntax()){ // jelsi poprawne wyrazenie to liczy i dodaje do historii
+
+    if (expression.checkSyntax() ){ // jelsi poprawne wyrazenie to liczy i dodaje do historii
 
         Double result=expression.calculate();
         listModel.lastElement().setFunction(result.toString()); // wartosc osttaniej funkcji zwracajacej wynik osttaniego wyrazenia
         last=form; //zapamietanie ostatniego wyrazenia
         addHistory(form, result); // dodaje do historii
     }
-    else{
+    else if(expression.getExpressionString().isEmpty()==false){
 
         String errorMessage = expression.getErrorMessage();
 //        JOptionPane.showMessageDialog(null, "Wrong data format"," Error", JOptionPane.ERROR_MESSAGE);
