@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="close" mnemonicParsing="false" onAction="#closeApplication" text="Close" />
+            </items>
+          </Menu>
+          <Menu fx:id="autor" mnemonicParsing="false" />
+        </menus>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuBar>
+      <HBox fx:id="box" prefHeight="500.0" prefWidth="600.0" spacing="20.0">
+         <children>
+            <VBox prefHeight="290.0" prefWidth="170.0" spacing="5.0">
+               <children>
+                  <TextField alignment="CENTER" editable="false" text="TO DO" />
+                  <ListView fx:id="toDoList" prefHeight="263.0" prefWidth="170.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#deleteItem" text="Delete" />
+                              <MenuItem fx:id="edit" mnemonicParsing="false" onAction="#editItem" text="Edit" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu></ListView>
+               </children>
+            </VBox>
+            <VBox prefHeight="400.0" prefWidth="170.0" spacing="5.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
+               <children>
+                  <TextField alignment="CENTER" editable="false" text="IN PROGESS" />
+                  <ListView fx:id="progressList" prefHeight="262.0" prefWidth="170.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem fx:id="deleteProgress" mnemonicParsing="false" onAction="#deleteItemProgress" text="Delete" />
+                              <MenuItem fx:id="editProgress" mnemonicParsing="false" onAction="#editItemProgress" text="Edit" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu></ListView>
+                  <Button fx:id="addTask" alignment="CENTER" contentDisplay="CENTER" lineSpacing="10.0" mnemonicParsing="false" onAction="#addTask" prefHeight="37.0" prefWidth="176.0" text="Add new task">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="290.0" prefWidth="170.0" spacing="5.0">
+               <children>
+                  <TextField alignment="CENTER" editable="false" text="DONE" />
+                  <ListView fx:id="doneList" prefHeight="266.0" prefWidth="170.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem fx:id="deleteDone" mnemonicParsing="false" onAction="#deleteItemDone" text="Delete" />
+                              <MenuItem fx:id="editDone" mnemonicParsing="false" onAction="#editItemDone" text="Edit" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu></ListView>
+               </children>
+            </VBox>
+         </children>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+         <padding>
+            <Insets bottom="5.0" left="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
